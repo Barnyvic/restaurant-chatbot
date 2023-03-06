@@ -2,13 +2,12 @@
   "name": "restaurant-chatbot",
   "version": "1.0.0",
   "description": "restaurant chatbot that  assist customers in placing orders for their preferred meals.",
-  "main": "index.js",
+  "main": "server.js",
   "author": "Barny Victor",
   "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index",
-    "prod": "node src/index"
+    "dev": "nodemon server",
+    "start": "node server"
   },
   "devDependencies": {
     "nodemon": "^2.0.21"

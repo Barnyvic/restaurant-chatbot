@@ -25,11 +25,12 @@ const sessionMiddleWare = session({
 app.use(sessionMiddleWare);
 io.engine.use(sessionMiddleWare);
 
-const FoodItems = [
-    { id: 1, name: 'Pizza', price: 10 },
-    { id: 2, name: 'Burger', price: 8 },
-    { id: 3, name: 'Pasta', price: 12 },
-];
+const FoodItems = {
+    2: 'Pizza',
+    3: 'Burger',
+    4: 'Ice-cream',
+    5: 'Pasta',
+};
 
 // run when client connect
 io.on('connection', (socket) => {
@@ -61,18 +62,19 @@ io.on('connection', (socket) => {
                 const items = Object.entries(FoodItems)
                     .map(([key, value]) => `${key}. ${value}`)
                     .join('\n');
-                 io.to(sessionId).emit('bot-message', {
-                     sender: 'bot',
-                     message: `Here is a list of items you can order:<br>${items}<br>Please select one by typing its number.`,
-                 });;
+
+                io.to(sessionId).emit('bot-message', {
+                    sender: 'bot',
+                    message: `Here is a list of items you can order:<br>${items}<br>Please select one by typing its number.`,
+                });
                 break;
             case '2':
             case '3':
             case '4':
             case '5':
                 const selectedIndex = Number(message);
-                if (FoodItems.hasOwnProperty(selectedItem)) {
-                    const selectedItem = fastFoods[selectedIndex];
+                if (FoodItems.hasOwnProperty(selectedIndex)) {
+                    const selectedItem = FoodItems[selectedIndex];
                     socket.session.currentOrder =
                         socket.session.currentOrder || [];
                     socket.session.currentOrder.push(selectedItem);
@@ -90,7 +92,7 @@ io.on('connection', (socket) => {
                     orderHistory.push(socket.session.currentOrder);
                     io.to(sessionId).emit('bot-message', {
                         sender: 'bot',
-                        message: `${selectedItem}<b> Order placed...</b> `,
+                        message: `<b> Order placed...</b> `,
                     });
                     delete socket.session.currentOrder;
                 }

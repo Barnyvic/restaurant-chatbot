@@ -3,11 +3,11 @@ const Message = document.getElementById('msg');
 const socket = io('ws://localhost:4000');
 
 socket.on('bot-message', function (msg) {
+        console.log(msg)
         handleUserMessage(msg);
 });
 
 socket.on('chat-message', function (msg) {
-        console.log(msg);
         handleUserMessage(msg);
 });
 

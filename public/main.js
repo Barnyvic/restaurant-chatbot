@@ -1,47 +1,22 @@
 const chatForm = document.getElementById('chat-form');
-const Message = document.getElementById('msg');
-const socket = io('ws://localhost:4000');
+const Message = document.getElementById('Chatdiv');
+const inputField = document.getElementById('inputMessage');
+const mainContainer = document.querySelector('.msger-chat');
+
+const socket = io();
 
 socket.on('bot-message', function (msg) {
-    console.log(msg);
-    handleUserMessage(msg);
+    handleMessage(msg);
+    mainContainer.scrollTop = mainContainer.scrollHeight;
 });
 
-socket.on('chat-message', function (msg) {
-    handleUserMessage(msg);
-});
-
-const handleUserMessage = (msg) => {
+const handleMessage = (msg) => {
     const div = document.createElement('div');
     div.classList.add('message');
-    //check if the message is from the bot or the user
-    if (msg.sender === 'bot') {
-        div.innerHTML = `<div class="message-right">
-                                        <div>
-                                                <div
-                                                        class="message-content"
-                                                >
-                                                        <p>${msg.message}</p>
-                                                </div>
-                                                <div class="message-meta">
-                                                        <p id="time"></p>
-                                                </div>
-                                        </div>
-                                </div> `;
-    } else {
-        div.innerHTML = `<div class="message-left">
-                                        <div>
-                                                <div
-                                                        class="message-content"
-                                                >
-                                                        <p>${msg}</p>
-                                                </div>
-                                                <div class="message-meta">
-                                                        <p id="time"></p>
-                                                </div>
-                                        </div>
-                                </div>`;
-    }
+    div.innerHTML = `
+    <p class="meta">${msg.user} <span>${msg.time}</span></p>
+    <p class="text">${msg.message}</p>
+    `;
     //append the div to the messages div
     Message.appendChild(div);
 };
@@ -59,11 +34,10 @@ chatForm.addEventListener('submit', (e) => {
     }
 
     if (Message !== '') {
-        console.log(Message);
         //sending Message to the Server
         socket.emit('chat-message', Message);
+        // Clear input
+        e.target.elements.inputMessage.value = '';
+        e.target.elements.inputMessage.focus();
     }
-    // Clear input
-    e.target.elements.inputMessage.value = '';
-    e.target.elements.inputMessage.focus();
 });

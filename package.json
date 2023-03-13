@@ -6,8 +6,8 @@
   "author": "Barny Victor",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server",
-    "start": "node src/server"
+    "dev": "nodemon server",
+    "start": "node server"
   },
   "devDependencies": {
     "nodemon": "^2.0.21"

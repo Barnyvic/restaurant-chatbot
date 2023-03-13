@@ -32,19 +32,30 @@
                         
                         </div>
 
-                        <form class="msger-inputarea" id="chat-form">
-                                <input
-                                        type="text"
-                                        class="msger-input"
-                                        id="inputMessage"
-                                        placeholder="Enter your message..."
-                                />
-                                <button type="submit" class="msger-send-btn">
-                                        Send
-                                </button>
-                        </form>
-                </section>
-                <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-                <script src="main.js"></script>
-        </body>
+          <div class="msg-bubble">
+            <div class="msg-info">
+              <div class="msg-info-name">ChatGril</div>
+            </div>
+            <div id="msg-text"></div>
+          </div>
+        </div>
+
+        <div class="msg right-msg" id="msg-right">
+          
+        </div>
+      </main>
+
+      <form class="msger-inputarea" id="chat-form">
+        <input
+          type="text"
+          class="msger-input"
+          id="inputMessage"
+          placeholder="Enter your message..."
+        />
+        <button type="submit" class="msger-send-btn">Send</button>
+      </form>
+    </section>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>

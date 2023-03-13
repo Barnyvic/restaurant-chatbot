@@ -7,7 +7,7 @@ const { formatMessageAndTime } = require('./helper/formatMessage');
 require('dotenv').config();
 
 // PORT Number
-const PORT = 4000 || process.env.PORT;
+const PORT = 3000 || process.env.PORT;
 
 // initializing app and socket.io
 const app = express();

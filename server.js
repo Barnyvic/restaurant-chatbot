@@ -4,6 +4,7 @@ const http = require('http');
 const path = require('path');
 const session = require('express-session');
 
+// PORT Number
 const PORT = 4000;
 const server = http.createServer(app);
 
@@ -18,12 +19,14 @@ const sessionMiddleWare = session({
     saveUninitialized: true,
     cookie: {
         secure: false,
-        maxAge: 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 90,
     },
 });
 
 app.use(sessionMiddleWare);
 io.engine.use(sessionMiddleWare);
+
+// FoodItems list
 
 const FoodItems = {
     2: 'Pizza',

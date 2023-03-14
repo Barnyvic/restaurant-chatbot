@@ -35,6 +35,7 @@ io.on('connection', (socket) => {
 
       const botName = 'Chat-Grill';
       const orderHistory = [];
+      let switchExecuted = false;
 
       const botMessage = (message) => {
             socket.emit('bot-message', formatMessageAndTime(botName, message));
@@ -68,10 +69,10 @@ io.on('connection', (socket) => {
                                           `<li> Select<b> ${item.id}</b> for <b>${item.food}</b></li>`
                               ).join('\n');
 
-                              botMessage(` The following is a list of the available items.:
-            <ul>
-            ${menuOption}
-            </ul>`);
+                              botMessage(
+                                    ` The following is a list of the available items.: <ul>${menuOption}</ul>`
+                              );
+                              switchExecuted = true;
                               break;
                         case '5':
                         case '6':
@@ -79,25 +80,27 @@ io.on('connection', (socket) => {
                         case '8':
                         case '9':
                         case '10':
-                              const userInput = Number(msg);
-                              const menu = FoodItems.find(
-                                    (item) => item.id === userInput
-                              );
-                              if (menu) {
-                                    socket.request.session.currentOrder.push(
-                                          menu
-                                    );
+                              if (switchExecuted === false) {
                                     botMessage(
-                                          `<b>${menu.food}</b> has been put in your shopping cart..
-              <br /><br />
-             Do you wish to add to your shopping cart? if so, please respond with the corresponding number.
-              <br /><br />
-              If not, <b>hit 97</b> to view the items in your cart or <b>99</b> to check out your order.`
+                                          '<b>Press 1 to see menu options...\u{1F622}</b>'
                                     );
                               } else {
-                                    botMessage(
-                                          '<b>Invalid Input...\u{1F622}</b>'
+                                    const userInput = Number(msg);
+                                    const menu = FoodItems.find(
+                                          (item) => item.id === userInput
                                     );
+                                    if (menu) {
+                                          socket.request.session.currentOrder.push(
+                                                menu
+                                          );
+                                          botMessage(
+                                                `<b>${menu.food}</b> has been put in your shopping cart.. <br /><br />Do you wish to add to your shopping cart? if so, please respond with the corresponding number. <br /><br />If not, <b>hit 97</b> to view the items in your cart or <b>99</b> to check out your order.`
+                                          );
+                                    } else {
+                                          botMessage(
+                                                '<b>Invalid Input...\u{1F622}</b>'
+                                          );
+                                    }
                               }
                               break;
                         case '97':

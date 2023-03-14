@@ -33,7 +33,7 @@ body {
       max-width: 600px;
       margin: 25px auto;
       margin: 25px 10px;
-      height: calc(100% - 50px);
+      height: calc(50% - 100px);
       border-radius: 12px;
       background: var(--msger-bg);
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;

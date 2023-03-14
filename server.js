@@ -88,11 +88,11 @@ io.on('connection', (socket) => {
                                           menu
                                     );
                                     botMessage(
-                                          `${menu.food} has been put in your shopping cart..
+                                          `<b>${menu.food}</b> has been put in your shopping cart..
               <br /><br />
              Do you wish to add to your shopping cart? if so, please respond with the corresponding number.
               <br /><br />
-              If not, hit 97 to view the items in your cart or 99 to check out your order.`
+              If not, <b>hit 97</b> to view the items in your cart or <b>99</b> to check out your order.`
                                     );
                               } else {
                                     botMessage(
@@ -106,7 +106,7 @@ io.on('connection', (socket) => {
                                           .length === 0
                               ) {
                                     botMessage(
-                                          'Oops!! Cart is empty. Please place an order in the cart.'
+                                          'Oops!! Cart is empty \u{1F612}. Please place an order in the cart.'
                                     );
                               } else {
                                     const currentOrderText =
@@ -114,14 +114,14 @@ io.on('connection', (socket) => {
                                                 .map((item) => item.food)
                                                 .join(', ');
                                     botMessage(
-                                          `Your current order(s):<br/><br/> ${currentOrderText}`
+                                          `Your current order(s):<br/><br/> <b>${currentOrderText}</b>`
                                     );
                               }
                               break;
                         case '98':
                               if (!orderHistory.length) {
                                     botMessage(
-                                          'Your order history is empty. Kindly place an order now...'
+                                          'Your order history is empty \u{1F612}. Kindly place an order now...'
                                     );
                               } else {
                                     const orderHistoryText = orderHistory
@@ -144,13 +144,15 @@ io.on('connection', (socket) => {
                                           .length === 0
                               ) {
                                     botMessage(
-                                          'Oops!!! Orders cannot be placed with an empty cart. Please add to your shopping basket.'
+                                          'Oops!!! Orders cannot be placed with an empty cart \u{1F612}. Please add to your shopping basket.'
                                     );
                               } else {
                                     orderHistory.push(
                                           ...socket.request.session.currentOrder
                                     );
-                                    botMessage('Order placed!!');
+                                    botMessage(
+                                          'Order placed!!\uD83D\uDC83\u{1F622}'
+                                    );
                                     socket.request.session.currentOrder = [];
                               }
                               break;
@@ -160,17 +162,19 @@ io.on('connection', (socket) => {
                                           .length === 0
                               ) {
                                     botMessage(
-                                          'Cart empty! No order to cancel'
+                                          'Oops!! \u{1F927} Cart empty! No order to cancel'
                                     );
                               } else {
                                     socket.request.session.currentOrder = [];
                                     botMessage(
-                                          'Order cancelled! You can still place an order.<br /><br /> Press 1 to see menu'
+                                          'Order cancelled!\u{1F622} You can still place an order.<br /><br /> <b> Press 1</b> to see menu \u{1F60A}'
                                     );
                               }
                               break;
                         default:
-                              botMessage('Invalid selection. Please try again');
+                              botMessage(
+                                    'Invalid selection. Please try again \u{1F624}\u{1F612}\u{1F616}'
+                              );
                   }
             }
       });

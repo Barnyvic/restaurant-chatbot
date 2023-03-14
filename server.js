@@ -53,12 +53,11 @@ io.on('connection', (socket) => {
                   io.emit('bot-message', formatMessageAndTime(userName, msg));
                   botMessage(
                         `Welcome,<b>${userName}</b>. <br /><br />
-        
-        To place an order, press 1.
-        <br />To see your current order, press 97. 
-        <br />To see your order history, press 98. 
-        <br />To checkout your order, press 99. 
-        <br />Press 0 to cancel.`
+         <b>press 1</b> To place an order,
+        <br />To see your current order, <b> press 97</b>. 
+        <br />To see your order history, <b>press 98</b>. 
+        <br />To checkout your order, <b>press 99</b>. 
+        <br /><b>Press 0</b> to cancel.`
                   );
             } else {
                   io.emit('bot-message', formatMessageAndTime(userName, msg));
@@ -66,7 +65,7 @@ io.on('connection', (socket) => {
                         case '1':
                               const menuOption = FoodItems.map(
                                     (item) =>
-                                          `<li> Select ${item.id} for ${item.food}</li>`
+                                          `<li> Select<b> ${item.id}</b> for <b>${item.food}</b></li>`
                               ).join('\n');
 
                               botMessage(` The following is a list of the available items.:

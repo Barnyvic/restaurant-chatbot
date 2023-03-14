@@ -84,6 +84,9 @@ body {
       align-self: flex-end;
       border-bottom-right-radius: 0;
       background-color: var(--left-msg-bg);
+      -webkit-animation: scale-up-bl 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)
+            both;
+      animation: scale-up-bl 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 .message:nth-child(odd) {
@@ -94,14 +97,14 @@ body {
       border-bottom-left-radius: 0;
 }
 
-.meta {
+.user {
       color: var(--dark-color);
       font-size: 0.9rem;
       font-weight: 500;
       margin-bottom: 10px;
 }
 
-.meta span {
+.user span {
       opacity: 0.7;
       font-size: 0.7rem;
 }
@@ -120,4 +123,36 @@ body {
 .msger-chat {
       background-color: var(--chat-background);
       font-family: 'Sono', sans-serif;
+}
+.chat-container::-webkit-scrollbar {
+      display: none;
+}
+
+@-webkit-keyframes scale-up-bl {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+  }
+}
+@keyframes scale-up-bl {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+  }
 }

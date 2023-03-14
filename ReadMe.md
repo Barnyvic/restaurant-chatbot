@@ -33,6 +33,20 @@ on devices.
 
 ---
 
+## Set-up
+
+> > Clone the repository from github to your local computer,
+
+> > cd into the folder,
+
+> > run yarn to install update the node_module,
+
+> > run yarn dev to start the server with nodemon.
+
+> > run yarn start to start the server with node.
+
+---
+
 ## Getting started...
 
 

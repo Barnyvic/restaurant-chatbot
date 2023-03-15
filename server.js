@@ -47,6 +47,7 @@ io.on('connection', (socket) => {
 
       socket.request.session.currentOrder = [];
       let userName = '';
+      let menuOption = '';
 
       socket.on('chat-message', (msg) => {
             if (!userName) {
@@ -64,7 +65,7 @@ io.on('connection', (socket) => {
                   io.emit('bot-message', formatMessageAndTime(userName, msg));
                   switch (msg) {
                         case '1':
-                              const menuOption = FoodItems.map(
+                              menuOption = FoodItems.map(
                                     (item) =>
                                           `<li> Select<b> ${item.id}</b> for <b>${item.food}</b></li>`
                               ).join('\n');
@@ -94,7 +95,7 @@ io.on('connection', (socket) => {
                                                 menu
                                           );
                                           botMessage(
-                                                `<b>${menu.food}</b> has been put in your shopping cart.. <br /><br />Do you wish to add to your shopping cart? if so, please respond with the corresponding number. <br /><br />If not, <b>hit 97</b> to view the items in your cart or <b>99</b> to check out your order.`
+                                                `<b>${menu.food}</b> has been put in your shopping cart.. <br /><br />Do you wish to add to your shopping cart? if so, please respond with the corresponding number. <ul>${menuOption}</ul> <br /><br />If not, <b>hit 97</b> to view the items in your cart or <b>99</b> to check out your order.`
                                           );
                                     } else {
                                           botMessage(
@@ -154,7 +155,7 @@ io.on('connection', (socket) => {
                                           ...socket.request.session.currentOrder
                                     );
                                     botMessage(
-                                          'Order placed!!\uD83D\uDC83\u{1F622}'
+                                          'Order placed!!\uD83D\uDC83'
                                     );
                                     socket.request.session.currentOrder = [];
                               }
